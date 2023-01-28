@@ -10,7 +10,6 @@ public class ApiGetwayApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ApiGetwayApplication.class, args);
-		//SpringApplication.run(ApiGetwayApplication.class, args);
 	}
 
 }
