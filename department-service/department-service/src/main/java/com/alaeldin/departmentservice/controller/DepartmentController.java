@@ -2,6 +2,7 @@ package com.alaeldin.departmentservice.controller;
 
 import com.alaeldin.departmentservice.Dto.DepartmentDto;
 import com.alaeldin.departmentservice.service.DepartmentService;
+import com.alaeldin.departmentservice.service.impl.DepartmentSServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,7 @@ import org.springframework.web.servlet.function.EntityResponse;
 @AllArgsConstructor
 public class DepartmentController {
 
-    private DepartmentService departmentService;
+    private DepartmentSServiceImpl departmentService;
     @PostMapping
     public ResponseEntity<DepartmentDto> saveDepartment(@RequestBody DepartmentDto departmentDto){
         DepartmentDto departmentSaveDto = departmentService.saveDepartment(departmentDto);

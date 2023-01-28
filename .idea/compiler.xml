@@ -17,7 +17,7 @@
       <module name="api-getway" target="19" />
       <module name="department-service" target="19" />
       <module name="employment-service" target="19" />
-      <module name="service-registry" target="19" />
+      <module name="service-registry" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
