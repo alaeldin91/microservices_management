@@ -7,6 +7,7 @@ import com.alaeldin.employmentservice.entity.Employement;
 import com.alaeldin.employmentservice.repository.RepositoryEmployeeMent;
 import com.alaeldin.employmentservice.service.ApiClient;
 import com.alaeldin.employmentservice.service.EmployeementService;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -35,6 +36,7 @@ public class EmploymentServiceImpl implements EmployeementService {
          return employmentDtoSave;
     }
 
+    @CircuitBreaker(name = "${spring.application.name}",fallbackMethod = "getDefaultDepartment")
     @Override
     public APIResponseDto getEmployeeById(Long id) {
         Employement  employement = repositoryEmployeeMent.findById(id).get();
@@ -42,6 +44,23 @@ public class EmploymentServiceImpl implements EmployeementService {
      //                + employement.getCode())
        //         .retrieve().bodyToMono(DepartmentDto.class).block();
         DepartmentDto departmentDto = apiClient.getDepartmentByCode(employement.getCode());
+        EmploymentDto employmentDto = new EmploymentDto();
+        employmentDto.setId(employement.getId());
+        employmentDto.setFirstName(employement.getFirstName());
+        employmentDto.setLastName(employement.getLastName());
+        employmentDto.setEmail(employement.getEmail());
+        employmentDto.setCode(employement.getCode());
+        APIResponseDto apiResponseDto = new APIResponseDto();
+        apiResponseDto.setEmploymentDto(employmentDto);
+        apiResponseDto.setDepartmentDto(departmentDto);
+        return apiResponseDto;
+    }
+    public APIResponseDto getDefaultDepartment(Long id,Exception exception) {
+        Employement  employement = repositoryEmployeeMent.findById(id).get();
+        DepartmentDto departmentDto = new DepartmentDto();
+        departmentDto.setDepartmentName("R&D DepartMent");
+        departmentDto.setDepartmentDescription("allallkskjdh");
+        departmentDto.setCode("Ab0003");
         EmploymentDto employmentDto = new EmploymentDto();
         employmentDto.setId(employement.getId());
         employmentDto.setFirstName(employement.getFirstName());

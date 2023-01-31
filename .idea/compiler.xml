@@ -7,6 +7,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="organization-service" />
         <module name="configserver" />
         <module name="department-service" />
         <module name="api-getway" />
@@ -19,7 +20,8 @@
       <module name="configserver" target="19" />
       <module name="department-service" target="19" />
       <module name="employment-service" target="19" />
-      <module name="service-registry" target="17" />
+      <module name="organization-service" target="19" />
+      <module name="service-registry" target="19" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -28,6 +30,7 @@
       <module name="configserver" options="-parameters" />
       <module name="department-service" options="-parameters" />
       <module name="employment-service" options="-parameters" />
+      <module name="organization-service" options="-parameters" />
       <module name="service-registry" options="-parameters" />
     </option>
   </component>
